@@ -13,6 +13,7 @@
 		72A5343926C487110069B90C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72A5343826C487110069B90C /* Assets.xcassets */; };
 		72A5343C26C487110069B90C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A5343A26C487110069B90C /* LaunchScreen.storyboard */; };
 		72A5343F26C487110069B90C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5343E26C487110069B90C /* main.m */; };
+		72A5344A26C4951E0069B90C /* DestinationCityRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5344926C4951E0069B90C /* DestinationCityRowViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,8 @@
 		72A5343B26C487110069B90C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72A5343D26C487110069B90C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		72A5343E26C487110069B90C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		72A5344826C494F00069B90C /* DestinationCityRowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DestinationCityRowViewController.h; sourceTree = "<group>"; };
+		72A5344926C4951E0069B90C /* DestinationCityRowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DestinationCityRowViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,8 +88,18 @@
 			children = (
 				72A5343226C4870F0069B90C /* ViewController.h */,
 				72A5343326C4870F0069B90C /* ViewController.m */,
+				72A5344726C494D40069B90C /* Destination City Row */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		72A5344726C494D40069B90C /* Destination City Row */ = {
+			isa = PBXGroup;
+			children = (
+				72A5344826C494F00069B90C /* DestinationCityRowViewController.h */,
+				72A5344926C4951E0069B90C /* DestinationCityRowViewController.m */,
+			);
+			path = "Destination City Row";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -158,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72A5343426C4870F0069B90C /* ViewController.m in Sources */,
+				72A5344A26C4951E0069B90C /* DestinationCityRowViewController.m in Sources */,
 				72A5342E26C4870F0069B90C /* AppDelegate.m in Sources */,
 				72A5343F26C487110069B90C /* main.m in Sources */,
 				72A5343126C4870F0069B90C /* SceneDelegate.m in Sources */,
