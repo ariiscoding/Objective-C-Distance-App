@@ -59,18 +59,34 @@
 		72A5342B26C4870F0069B90C /* Objective C Distance App */ = {
 			isa = PBXGroup;
 			children = (
-				72A5342C26C4870F0069B90C /* AppDelegate.h */,
-				72A5342D26C4870F0069B90C /* AppDelegate.m */,
-				72A5342F26C4870F0069B90C /* SceneDelegate.h */,
-				72A5343026C4870F0069B90C /* SceneDelegate.m */,
-				72A5343226C4870F0069B90C /* ViewController.h */,
-				72A5343326C4870F0069B90C /* ViewController.m */,
+				72A5344526C488450069B90C /* App Startup */,
+				72A5344626C488500069B90C /* View Controllers */,
 				72A5343826C487110069B90C /* Assets.xcassets */,
 				72A5343A26C487110069B90C /* LaunchScreen.storyboard */,
 				72A5343D26C487110069B90C /* Info.plist */,
 				72A5343E26C487110069B90C /* main.m */,
 			);
 			path = "Objective C Distance App";
+			sourceTree = "<group>";
+		};
+		72A5344526C488450069B90C /* App Startup */ = {
+			isa = PBXGroup;
+			children = (
+				72A5342C26C4870F0069B90C /* AppDelegate.h */,
+				72A5342D26C4870F0069B90C /* AppDelegate.m */,
+				72A5342F26C4870F0069B90C /* SceneDelegate.h */,
+				72A5343026C4870F0069B90C /* SceneDelegate.m */,
+			);
+			path = "App Startup";
+			sourceTree = "<group>";
+		};
+		72A5344626C488500069B90C /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				72A5343226C4870F0069B90C /* ViewController.h */,
+				72A5343326C4870F0069B90C /* ViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
