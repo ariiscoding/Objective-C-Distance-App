@@ -14,9 +14,11 @@
 		72A5343C26C487110069B90C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72A5343A26C487110069B90C /* LaunchScreen.storyboard */; };
 		72A5343F26C487110069B90C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5343E26C487110069B90C /* main.m */; };
 		72A5344A26C4951E0069B90C /* DestinationCityRowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72A5344926C4951E0069B90C /* DestinationCityRowViewController.m */; };
+		8FB89CEAA0A7B590916DFF1B /* Pods_Objective_C_Distance_App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B090C5C1FF29F0D9472BB090 /* Pods_Objective_C_Distance_App.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A3AC61CE1376CA6F6302CE1 /* Pods-Objective C Distance App.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective C Distance App.release.xcconfig"; path = "Target Support Files/Pods-Objective C Distance App/Pods-Objective C Distance App.release.xcconfig"; sourceTree = "<group>"; };
 		72A5342926C4870F0069B90C /* Objective C Distance App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Objective C Distance App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		72A5342C26C4870F0069B90C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72A5342D26C4870F0069B90C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -30,6 +32,8 @@
 		72A5343E26C487110069B90C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		72A5344826C494F00069B90C /* DestinationCityRowViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DestinationCityRowViewController.h; sourceTree = "<group>"; };
 		72A5344926C4951E0069B90C /* DestinationCityRowViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DestinationCityRowViewController.m; sourceTree = "<group>"; };
+		B090C5C1FF29F0D9472BB090 /* Pods_Objective_C_Distance_App.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Objective_C_Distance_App.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E93B56C2A8120BB98D15B98E /* Pods-Objective C Distance App.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Objective C Distance App.debug.xcconfig"; path = "Target Support Files/Pods-Objective C Distance App/Pods-Objective C Distance App.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FB89CEAA0A7B590916DFF1B /* Pods_Objective_C_Distance_App.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +53,8 @@
 			children = (
 				72A5342B26C4870F0069B90C /* Objective C Distance App */,
 				72A5342A26C4870F0069B90C /* Products */,
+				D7B238AFFB47777539D6CB24 /* Pods */,
+				DFA043EC46AB72DC38A3C4D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -102,6 +109,24 @@
 			path = "Destination City Row";
 			sourceTree = "<group>";
 		};
+		D7B238AFFB47777539D6CB24 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E93B56C2A8120BB98D15B98E /* Pods-Objective C Distance App.debug.xcconfig */,
+				6A3AC61CE1376CA6F6302CE1 /* Pods-Objective C Distance App.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		DFA043EC46AB72DC38A3C4D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B090C5C1FF29F0D9472BB090 /* Pods_Objective_C_Distance_App.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -109,9 +134,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 72A5344226C487110069B90C /* Build configuration list for PBXNativeTarget "Objective C Distance App" */;
 			buildPhases = (
+				8A5C4DD3CB7A4343DFFE270B /* [CP] Check Pods Manifest.lock */,
 				72A5342526C4870F0069B90C /* Sources */,
 				72A5342626C4870F0069B90C /* Frameworks */,
 				72A5342726C4870F0069B90C /* Resources */,
+				FBBE6A3807B9C98E7B6260CE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -164,6 +191,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		8A5C4DD3CB7A4343DFFE270B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Objective C Distance App-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FBBE6A3807B9C98E7B6260CE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Objective C Distance App/Pods-Objective C Distance App-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Objective C Distance App/Pods-Objective C Distance App-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Objective C Distance App/Pods-Objective C Distance App-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		72A5342526C4870F0069B90C /* Sources */ = {
@@ -306,6 +375,7 @@
 		};
 		72A5344326C487110069B90C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E93B56C2A8120BB98D15B98E /* Pods-Objective C Distance App.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -324,6 +394,7 @@
 		};
 		72A5344426C487110069B90C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6A3AC61CE1376CA6F6302CE1 /* Pods-Objective C Distance App.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
