@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DestinationCityRowViewController : UIViewController
+@interface DestinationCityRowViewController : UIViewController <UITextFieldDelegate>
 
 @end
 
