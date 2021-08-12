@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import "DestinationCityRowViewController.h"
+#import "DistanceGetter/DGDistanceRequest.h"
 
 @interface ViewController ()
 
@@ -22,6 +23,7 @@ UIStackView *inputStack;
 
 DestinationCityRowViewController *destination1;
 DestinationCityRowViewController *destination2;
+DestinationCityRowViewController *destination3;
 
 
 // MARK: Lifecycle
@@ -66,9 +68,11 @@ DestinationCityRowViewController *destination2;
 - (void)setUpDestinationRows {
     destination1 = [DestinationCityRowViewController new];
     destination2 = [DestinationCityRowViewController new];
+    destination3 = [DestinationCityRowViewController new];
     
     [self.view addSubview:destination1.view];
     [self.view addSubview:destination2.view];
+    [self.view addSubview:destination3.view];
 }
 
 
@@ -120,6 +124,7 @@ DestinationCityRowViewController *destination2;
 - (void)setUpDestinationRowConstraints {
     [self setUpConstraintForDestinationRow:destination1 top:inputStack];
     [self setUpConstraintForDestinationRow:destination2 top:destination1.view];
+    [self setUpConstraintForDestinationRow:destination3 top:destination2.view];
 }
 
 
