@@ -151,8 +151,6 @@ DGDistanceRequest *req;
     
     req = [[DGDistanceRequest alloc] initWithLocationDescriptions:destinationArray sourceDescription:start];
     
-    NSLog(@"Sending request with destinations: %@", destinationArray);
-    
     [req start];
     
     __weak ViewController* weakSelf = self;
@@ -170,8 +168,6 @@ DGDistanceRequest *req;
     
     // Prevent circular references
     req = nil;
-    
-    NSLog(@"received callback: %@", distances);
     
     [self setDistance:distances[0] toRow:_destination1];
     [self setDistance:distances[1] toRow:_destination2];

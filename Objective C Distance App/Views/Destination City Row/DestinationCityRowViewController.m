@@ -9,6 +9,8 @@
 
 @interface DestinationCityRowViewController ()
 
+// MARK: These are private instance variables.
+
 @property (nonatomic) UITextField *destinationCityInput;
 @property (nonatomic) UILabel *destinationDistanceLabel;
 
@@ -16,11 +18,25 @@
 
 @implementation DestinationCityRowViewController
 
+// MARK: This is a class variable, NOT an instance variable.
+NSObject *object;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self setUpSubviews];
     [self setUpConstraints];
+    
+    if (object == nil) {
+        object = [NSObject new];
+    }
+    
+    [self report];
+}
+
+
+- (void)report {
+    NSLog(@"This is object %@, property 1: %@, property 2: %@, object: %@", self, _destinationCityInput, _destinationDistanceLabel, object);
 }
 
 - (void)setUpSubviews {
