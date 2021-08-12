@@ -14,18 +14,17 @@
 @property (nonatomic) DestinationCityRowViewController *destination1;
 @property (nonatomic) DestinationCityRowViewController *destination2;
 @property (nonatomic) DestinationCityRowViewController *destination3;
+@property (nonatomic) DestinationCityRowViewController *destination4;
+
+@property (nonatomic) UITextField *originCityInput;
+@property (nonatomic) UIButton *updateButton;
+@property (nonatomic) UIStackView *inputStack;
+
+@property (nonatomic) DGDistanceRequest *req;
 
 @end
 
 @implementation ViewController
-
-// MARK: Properties
-
-UITextField *originCityInput;
-UIButton *updateButton;
-UIStackView *inputStack;
-
-DGDistanceRequest *req;
 
 
 // MARK: Lifecycle
@@ -48,34 +47,36 @@ DGDistanceRequest *req;
 }
 
 - (void)setUpInputStack {
-    originCityInput = [UITextField new];
-    [originCityInput setPlaceholder:@"Enter origin city"];
+    _originCityInput = [UITextField new];
+    [_originCityInput setPlaceholder:@"Enter origin city"];
     
-    updateButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [updateButton setTitle:@"Update" forState:UIControlStateNormal];
-    [updateButton addTarget:self action:@selector(didClickUpdateButton) forControlEvents:UIControlEventTouchUpInside];
+    _updateButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_updateButton setTitle:@"Update" forState:UIControlStateNormal];
+    [_updateButton addTarget:self action:@selector(didClickUpdateButton) forControlEvents:UIControlEventTouchUpInside];
     
-    inputStack = [UIStackView new];
-    [inputStack setAxis:UILayoutConstraintAxisHorizontal];
-    [inputStack setUserInteractionEnabled:TRUE];
-    [inputStack setDistribution:UIStackViewDistributionFill];
+    _inputStack = [UIStackView new];
+    [_inputStack setAxis:UILayoutConstraintAxisHorizontal];
+    [_inputStack setUserInteractionEnabled:TRUE];
+    [_inputStack setDistribution:UIStackViewDistributionFill];
     
-    [inputStack addArrangedSubview:originCityInput];
-    [inputStack addArrangedSubview:updateButton];
+    [_inputStack addArrangedSubview:_originCityInput];
+    [_inputStack addArrangedSubview:_updateButton];
     
-    [updateButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
+    [_updateButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
     
-    [self.view addSubview:inputStack];
+    [self.view addSubview:_inputStack];
 }
 
 - (void)setUpDestinationRows {
     _destination1 = [DestinationCityRowViewController new];
     _destination2 = [DestinationCityRowViewController new];
     _destination3 = [DestinationCityRowViewController new];
+    _destination4 = [DestinationCityRowViewController new];
     
     [self.view addSubview:_destination1.view];
     [self.view addSubview:_destination2.view];
     [self.view addSubview:_destination3.view];
+    [self.view addSubview:_destination4.view];
 }
 
 
@@ -87,16 +88,16 @@ DGDistanceRequest *req;
 }
 
 - (void)setUpInputStackConstraint {
-    [inputStack setTranslatesAutoresizingMaskIntoConstraints:FALSE];
+    [_inputStack setTranslatesAutoresizingMaskIntoConstraints:FALSE];
     
     // Top
-    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:inputStack attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.00 constant:100];
+    NSLayoutConstraint *top = [NSLayoutConstraint constraintWithItem:_inputStack attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1.00 constant:100];
     
     // Leading
-    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:inputStack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:30];
+    NSLayoutConstraint *leading = [NSLayoutConstraint constraintWithItem:_inputStack attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeading multiplier:1.0 constant:30];
     
     // Trailing
-    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:inputStack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-30];
+    NSLayoutConstraint *trailing = [NSLayoutConstraint constraintWithItem:_inputStack attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:-30];
     
     // Activation
     NSArray *constraints = [NSArray arrayWithObjects:top, leading, trailing, nil];
@@ -125,9 +126,10 @@ DGDistanceRequest *req;
 }
 
 - (void)setUpDestinationRowConstraints {
-    [self setUpConstraintForDestinationRow:_destination1 top:inputStack];
+    [self setUpConstraintForDestinationRow:_destination1 top:_inputStack];
     [self setUpConstraintForDestinationRow:_destination2 top:_destination1.view];
     [self setUpConstraintForDestinationRow:_destination3 top:_destination2.view];
+    [self setUpConstraintForDestinationRow:_destination4 top:_destination3.view];
 }
 
 // MARK: Distance Request
@@ -137,48 +139,51 @@ DGDistanceRequest *req;
 }
 
 - (void)sendDistanceRequest {
-    if ([originCityInput.text isEqualToString:@""]) {
+    if ([_originCityInput.text isEqualToString:@""]) {
         return;
     }
     
-    NSString *start = originCityInput.text;
+    NSString *start = _originCityInput.text;
     
     NSMutableArray *destinationArray = [NSMutableArray new];
     
     [destinationArray addObject:_destination1.getDestinationCity];
     [destinationArray addObject:_destination2.getDestinationCity];
     [destinationArray addObject:_destination3.getDestinationCity];
+    [destinationArray addObject:_destination4.getDestinationCity];
     
-    req = [[DGDistanceRequest alloc] initWithLocationDescriptions:destinationArray sourceDescription:start];
+    _req = [[DGDistanceRequest alloc] initWithLocationDescriptions:destinationArray sourceDescription:start];
     
-    [req start];
+    [_req start];
     
     __weak ViewController* weakSelf = self;
     
-    req.callback = ^(NSArray *distances) {
+    _req.callback = ^(NSArray *distances) {
         if (weakSelf == nil) return;
         else [weakSelf assignDistances:distances];
     };
     
-    [updateButton setEnabled:FALSE];
+    [_updateButton setEnabled:FALSE];
 }
 
 - (void)assignDistances: (NSArray*)distances {
-    [updateButton setEnabled:TRUE];
+    [_updateButton setEnabled:TRUE];
     
     // Prevent circular references
-    req = nil;
+    _req = nil;
     
     [self setDistance:distances[0] toRow:_destination1];
     [self setDistance:distances[1] toRow:_destination2];
     [self setDistance:distances[2] toRow:_destination3];
+    [self setDistance:distances[3] toRow:_destination4];
 }
 
-- (void)setDistance: (NSNumber*)distance toRow: (DestinationCityRowViewController*)row {
-    if ([distance isEqualToNumber:@-1]) {
+- (void)setDistance: (NSNumber*)distanceInM toRow: (DestinationCityRowViewController*)row {
+    if ([distanceInM isEqualToNumber:@-1]) {
         [row setDistanceLabel:@"N/A"];
     } else {
-        NSString *text = [NSString stringWithFormat:@"%@ miles", [self round:distance]];
+        NSNumber *distanceInKm = [NSNumber numberWithDouble:[distanceInM doubleValue] / 1000];
+        NSString *text = [NSString stringWithFormat:@"%@ km", [self round: distanceInKm]];
         
         [row setDistanceLabel:text];
     }
@@ -188,7 +193,7 @@ DGDistanceRequest *req;
     NSNumberFormatter *formatter = [NSNumberFormatter new];
     
     [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
-    [formatter setMaximumFractionDigits:2];
+    [formatter setMaximumFractionDigits:0];
     
     return [formatter stringFromNumber:number];
 }
