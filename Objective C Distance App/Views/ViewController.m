@@ -11,6 +11,10 @@
 
 @interface ViewController ()
 
+@property (nonatomic) DestinationCityRowViewController *destination1;
+@property (nonatomic) DestinationCityRowViewController *destination2;
+@property (nonatomic) DestinationCityRowViewController *destination3;
+
 @end
 
 @implementation ViewController
@@ -21,9 +25,7 @@ UITextField *originCityInput;
 UIButton *updateButton;
 UIStackView *inputStack;
 
-DestinationCityRowViewController *destination1;
-DestinationCityRowViewController *destination2;
-DestinationCityRowViewController *destination3;
+DGDistanceRequest *req;
 
 
 // MARK: Lifecycle
@@ -51,6 +53,7 @@ DestinationCityRowViewController *destination3;
     
     updateButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [updateButton setTitle:@"Update" forState:UIControlStateNormal];
+    [updateButton addTarget:self action:@selector(didClickUpdateButton) forControlEvents:UIControlEventTouchUpInside];
     
     inputStack = [UIStackView new];
     [inputStack setAxis:UILayoutConstraintAxisHorizontal];
@@ -66,13 +69,13 @@ DestinationCityRowViewController *destination3;
 }
 
 - (void)setUpDestinationRows {
-    destination1 = [DestinationCityRowViewController new];
-    destination2 = [DestinationCityRowViewController new];
-    destination3 = [DestinationCityRowViewController new];
+    _destination1 = [DestinationCityRowViewController new];
+    _destination2 = [DestinationCityRowViewController new];
+    _destination3 = [DestinationCityRowViewController new];
     
-    [self.view addSubview:destination1.view];
-    [self.view addSubview:destination2.view];
-    [self.view addSubview:destination3.view];
+    [self.view addSubview:_destination1.view];
+    [self.view addSubview:_destination2.view];
+    [self.view addSubview:_destination3.view];
 }
 
 
@@ -122,9 +125,76 @@ DestinationCityRowViewController *destination3;
 }
 
 - (void)setUpDestinationRowConstraints {
-    [self setUpConstraintForDestinationRow:destination1 top:inputStack];
-    [self setUpConstraintForDestinationRow:destination2 top:destination1.view];
-    [self setUpConstraintForDestinationRow:destination3 top:destination2.view];
+    [self setUpConstraintForDestinationRow:_destination1 top:inputStack];
+    [self setUpConstraintForDestinationRow:_destination2 top:_destination1.view];
+    [self setUpConstraintForDestinationRow:_destination3 top:_destination2.view];
+}
+
+// MARK: Distance Request
+
+- (void)didClickUpdateButton {
+    [self sendDistanceRequest];
+}
+
+- (void)sendDistanceRequest {
+    if ([originCityInput.text isEqualToString:@""]) {
+        return;
+    }
+    
+    NSString *start = originCityInput.text;
+    
+    NSMutableArray *destinationArray = [NSMutableArray new];
+    
+    [destinationArray addObject:_destination1.getDestinationCity];
+    [destinationArray addObject:_destination2.getDestinationCity];
+    [destinationArray addObject:_destination3.getDestinationCity];
+    
+    req = [[DGDistanceRequest alloc] initWithLocationDescriptions:destinationArray sourceDescription:start];
+    
+    NSLog(@"Sending request with destinations: %@", destinationArray);
+    
+    [req start];
+    
+    __weak ViewController* weakSelf = self;
+    
+    req.callback = ^(NSArray *distances) {
+        if (weakSelf == nil) return;
+        else [weakSelf assignDistances:distances];
+    };
+    
+    [updateButton setEnabled:FALSE];
+}
+
+- (void)assignDistances: (NSArray*)distances {
+    [updateButton setEnabled:TRUE];
+    
+    // Prevent circular references
+    req = nil;
+    
+    NSLog(@"received callback: %@", distances);
+    
+    [self setDistance:distances[0] toRow:_destination1];
+    [self setDistance:distances[1] toRow:_destination2];
+    [self setDistance:distances[2] toRow:_destination3];
+}
+
+- (void)setDistance: (NSNumber*)distance toRow: (DestinationCityRowViewController*)row {
+    if ([distance isEqualToNumber:@-1]) {
+        [row setDistanceLabel:@"N/A"];
+    } else {
+        NSString *text = [NSString stringWithFormat:@"%@ miles", [self round:distance]];
+        
+        [row setDistanceLabel:text];
+    }
+}
+
+- (NSString*)round: (NSNumber*)number {
+    NSNumberFormatter *formatter = [NSNumberFormatter new];
+    
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    [formatter setMaximumFractionDigits:2];
+    
+    return [formatter stringFromNumber:number];
 }
 
 

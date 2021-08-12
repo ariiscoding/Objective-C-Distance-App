@@ -12,6 +12,12 @@
 
 @interface DestinationCityRowViewController : UIViewController <UITextFieldDelegate>
 
+- (NSString*)getDestinationCity;
+
+- (BOOL)isDestinationCityEmpty;
+
+- (void)setDistanceLabel:(NSString*)text;
+
 @end
 
 
